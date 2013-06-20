@@ -203,22 +203,20 @@ skip_global_compinit=1
 # news server
 export NNTPSERVER=wdc.news.speakeasy.net
 
-# Simeon stuff
-#export SIMEON_LIB_DIR=/usr/remote/lib/simeon
-
 # CVS environment
 #export CVSROOT=":ext:nav@tanelorn:/opt/cvsroot"
 #export CVSROOT=/opt/cvsroot
 
 # mail stuff
-MAILHOST=bandersnatch.org
-
-# pilot stuff
-#export PILOTRATE=115200
-
-# C compiler stuff
-#export C_INCLUDE_PATH=/usr/local/include
+#MAILHOST=bandersnatch.org
 
 # nethack!
 export HACKOPTIONS='name:Bander,pickup_types:$,DECgraphics,color,dogname:Misha,catname:Molly,fruit:durian,!rest_on_space,showscore,showexp,time,!cmdassist,autodig'
+export NETHACKOPTIONS="$HACKOPTIONS"
 
+# tmux
+if [ -e /proc/loadavg ] ; then
+    export TMUXLOADCMD='cut -d " " -f 1-3 /proc/loadavg'
+else
+    export TMUXLOADCMD='uptime | cut -d " " -f 10-12'
+fi
