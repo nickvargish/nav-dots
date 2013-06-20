@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+envbin="$HOME/.virtualenv/$1/bin/activate"
+
+source $envbin

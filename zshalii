@@ -1,0 +1,17 @@
+
+# some basic aliases for zsh...
+#	Nick Vargish 12/07/93
+
+alias	cls=clear
+alias	myps="ps -aux | fgrep $USER"
+alias	vt='setenv TERM vt100 ; resize >/dev/null'
+alias	rl="rlogin"
+
+# get fancy, try setting up some extra ls options...
+unset LSOPTS
+if ls -F / >/dev/null 2>&1 ; then
+  LSOPTS='-F'
+fi
+alias   ls="ls $LSOPTS"
+
+
