@@ -58,6 +58,7 @@ HOMEBIN=$HOME/bin
 BINDIRS=( $HOMEBIN/$BINTYPE            \
           $HOMEBIN/links                \
 	  $HOMEBIN/scripts              \
+          $HOMEBIN/noarch               \
           $HOME/sw/bin                  \
 	  /usr/remote/bin		\
 	  /usr/local/X11R6/bin 		\

@@ -13,6 +13,19 @@ if [ -z "$NAV_ZSHENV" ]; then
   . $HOME/.zshenv
 fi
 
+if [ ! -d "$HOME/bin/noarch" ]; then
+  mkdir $HOME/bin/noarch
+  export PATH=$PATH:$HOME/bin/noarch
+fi
+loadavgs="$HOME/bin/noarch/loadavgs"
+if [ ! -f "$loadavgs" ]; then
+  cat >"$loadavgs" <<EOF
+#!/bin/sh
+uptime | awk '{ print \$(NF-2), \$(NF-1), \$(NF) }'
+EOF
+  chmod +x "$loadavgs"
+fi
+
 # some basic zsh options. there are many more in zsh(1).
 setopt automenu autolist nobeep listtypes extendedglob
 setopt histignoredups rmstarsilent promptsubst
