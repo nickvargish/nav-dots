@@ -10,8 +10,5 @@ done
 if [ ! -d $HOME/bin ]; then
   mkdir $HOME/bin
 fi
-if [ -d $HOME/bin/zsh.fn ]; then
-  rm -rf $HOME/bin/zsh.fn.bak
-  mv $HOME/bin/zsh.fn $HOME/bin/zsh.fn.bak
-fi
 cp -R zsh.fn $HOME/bin
+cp -R noarch $HOME/bin
