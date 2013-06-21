@@ -1,0 +1,1 @@
+loadcmd='#(sysctl vm.loadavg | cut -d \" \" -f 3-5)'
