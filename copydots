@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for f in emacs gnus zshenv zshrc zshalii tmux.conf; do
+for f in emacs gnus zshenv zshrc zshalii tmux.*; do
   if [ -e $HOME/.$f ] ; then
     mv $HOME/.$f $HOME/.$f.bak
   fi
