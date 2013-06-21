@@ -9,6 +9,13 @@
 # of zsh configuration can be commented out, so it will actually give
 # users a basic setup.
 
+# set up autoload for functions
+if [[ -d ~/.zsh/misc ]] ; then
+  fpath=($fpath ~/.zsh/misc)
+  autoload $(cd ~/.zsh/misc ; echo *[^\~])
+fi
+
+
 if [ -z "$NAV_ZSHENV" ]; then
   . $HOME/.zshenv
 fi
@@ -18,12 +25,30 @@ setopt automenu autolist nobeep listtypes extendedglob
 setopt histignoredups rmstarsilent promptsubst
 #setopt allexport
 
+# if this is a terminal worth setting the title in
+case "$TERM" in
+  xterm*|Eterm|screen)
+    add-zsh-hook chpwd chpwd-set-title
+    chpwd
+    ;;
+esac
+
+
 # This sets the prompt to <user>@<host>$, unless root, in which
 # case the $ is replaced by #.
 export PROMPT="%B%n%b@%B%m%b%(#.#.$) "
 
 # display the current working directory on the right of the screen, at prompt
 export RPROMPT="[ %~ ]"
+
+# set up git prompt
+if [[ -e ~/.zsh/git-prompt/gitprompt.zsh ]]; then
+  fpath=($fpath ~/.zsh/git-prompt)
+  source ~/.zsh/git-prompt/gitprompt.zsh
+  update_current_git_vars
+  export RPROMPT="[ %~$(git_super_status) ]"
+  chpwd
+fi
 
 # normally ignore the files with extensions listed here
 #export fignore=( \~ \# .bak )

@@ -14,23 +14,6 @@
 
 export NAV_ZSHENV="2.0"
 
-# set up autoload for functions
-if [[ -d ~/bin/zsh.fn ]] ; then
-  fpath=(~/bin/zsh.fn)
-  autoload $(cd ~/bin/zsh.fn ; echo *[^\~])
-fi
-
-# if this is a terminal worth setting the title in
-case "$TERM" in
-    xterm*|Eterm|screen)
-        chpwd () {
-            print -nP "\e]2;%m:%~\a"
-            print -nP "\e]1;%m!%n\a"
-        }
-        chpwd
-        ;;
-esac
-
 # don't automatically nice background processes
 unsetopt BGNICE
 # automatically export variables, where possible
@@ -215,9 +198,3 @@ export NNTPSERVER=wdc.news.speakeasy.net
 export HACKOPTIONS='name:Bander,pickup_types:$,DECgraphics,color,dogname:Misha,catname:Molly,fruit:durian,!rest_on_space,showscore,showexp,time,!cmdassist,autodig'
 export NETHACKOPTIONS="$HACKOPTIONS"
 
-# tmux
-if [ -e /proc/loadavg ] ; then
-    export TMUXLOADCMD='cut -d " " -f 1-3 /proc/loadavg'
-else
-    export TMUXLOADCMD='uptime | cut -d " " -f 10-12'
-fi
