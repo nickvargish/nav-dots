@@ -1,0 +1,15 @@
+#!/bin/sh
+
+myuname=$(uname)
+
+case "$myuname" in
+  Linux)
+    cut -d ' ' -f 1-3 /proc/loadavg
+    ;;
+  Darwin)
+    sysctl vm.loadavg | cut -d ' ' -f 3-5
+    ;;
+  *)
+    uptime | awk 'BEGIN { FS="[, ]+" } { print $(NF-2), $(NF-1), $(NF) }'
+    ;;
+esac
