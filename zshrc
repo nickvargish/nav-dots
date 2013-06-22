@@ -21,7 +21,6 @@ if [[ -d ~/.zsh/misc ]] ; then
   autoload $(cd ~/.zsh/misc ; echo *[^\~])
 fi
 
-
 if [ -z "$NAV_ZSHENV" ]; then
   . $HOME/.zshenv
 fi
@@ -42,7 +41,7 @@ export PROMPT="%B%n%b@%B%m%b%(#.#.$) "
 export RPROMPT='[ %36<..<%~ ]'
 
 # set up git prompt
-if [[ -e ~/.zsh/git-prompt/gitprompt.zsh ]]; then
+if [[ (-e ~/.zsh/git-prompt/gitprompt.zsh) && (-n "$(whence git)") ]]; then
   fpath=($fpath ~/.zsh/git-prompt)
   source ~/.zsh/git-prompt/gitprompt.zsh
   gitrprompt() {
