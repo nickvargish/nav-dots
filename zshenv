@@ -1,18 +1,31 @@
-######################
-#                    #
-#   Nick's .zshenv   #
-#                    #
-######################
+########################
+##                    ##
+##   Nick's .zshenv   ##
+##                    ##
+########################
 
-# version 2.0
+# version 3.0
+#
+# last major revision: 2013-06-21
 
 # note: all zsh shells source this (unless explicitly instructed not to)
 
-# =======
-# OPTIONS
-# =======
+export NAV_ZSHENV="3.0"
 
-export NAV_ZSHENV="2.0"
+## ========= ##
+## Functions ##
+## ========= ##
+
+# set up autoload for functions
+if [[ -d ~/.zsh/misc ]] ; then
+  fpath=($fpath ~/.zsh/misc)
+  autoload $(cd ~/.zsh/misc ; echo *[^\~])
+fi
+
+
+## ======= ##
+## OPTIONS ##
+## ======= ##
 
 # don't automatically nice background processes
 unsetopt BGNICE
@@ -24,9 +37,9 @@ unsetopt BGNICE
 skip_global_compinit=1
 
 
-# ==============
-# PATH FROM HELL
-# ==============
+## ==== ##
+## PATH ##
+## ==== ##
 
 # determine binary type
 BINTYPE=`uname -sr | sed -e "s/ /-/g"`
@@ -51,8 +64,7 @@ _bindirs=( $HOMEBIN/$BINTYPE
 	   /usr/bin
 	   /usr/sbin
 	   /sbin
-	   /bin
-	 )
+	   /bin )
 
 path=($^_bindirs(N))
 
@@ -64,9 +76,9 @@ rehash
 export path
 
 
-# =============
-# VARIABLE SOUP
-# =============
+## ============= ##
+## VARIABLE SOUP ##
+## ============= ##
 
 # your name here
 NAME='Nick Vargish'

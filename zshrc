@@ -1,25 +1,22 @@
-# .zshrc
-#	Nick Vargish 12/07/93
+#######################
+##                   ##
+##   Nick's .zshrc   ##
+##                   ##
+#######################
+
+# version 3.0
+#
+# last major revision: 2013-06-21
 
 # interactive zsh shells source this
 #       o commands that define the interactive environment go here
 #    	o PATH settings, aliases, et al belong in .zshenv
-
-# This is a complex set-up script. Many of the more esoteric aspects
-# of zsh configuration can be commented out, so it will actually give
-# users a basic setup.
 
 
 # some basic zsh options. there are many more in zsh(1).
 setopt automenu autolist nobeep listtypes extendedglob
 setopt histignoredups rmstarsilent promptsubst
 #setopt allexport
-
-# set up autoload for functions
-if [[ -d ~/.zsh/misc ]] ; then
-  fpath=($fpath ~/.zsh/misc)
-  autoload $(cd ~/.zsh/misc ; echo *[^\~])
-fi
 
 if [[ -z "$NAV_ZSHENV" ]]; then
   . $HOME/.zshenv
