@@ -1,2 +1,2 @@
-print -nP "\e]2;%m:%~\a"
+print -nP "\e]2;%m:%24<..<%1~\a"
 print -nP "\e]1;%m!%n\a"

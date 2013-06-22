@@ -185,7 +185,7 @@ skip_global_compinit=1
 #export ENVDRAW_LIBRARY_PATH=/usr/local/lib/stk/EnvDraw/
 
 # news server
-export NNTPSERVER=wdc.news.speakeasy.net
+#export NNTPSERVER=wdc.news.speakeasy.net
 
 # CVS environment
 #export CVSROOT=":ext:nav@tanelorn:/opt/cvsroot"

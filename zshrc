@@ -1,200 +1,102 @@
-######################
-#                    #
-#   Nick's .zshenv   #
-#                    #
-######################
+# .zshrc
+#	Nick Vargish 12/07/93
 
-# version 2.0
+# interactive zsh shells source this
+#       o commands that define the interactive environment go here
+#    	o PATH settings, aliases, et al belong in .zshenv
 
-# note: all zsh shells source this (unless explicitly instructed not to)
+# This is a complex set-up script. Many of the more esoteric aspects
+# of zsh configuration can be commented out, so it will actually give
+# users a basic setup.
 
-# =========
-# FUNCTIONS
-# =========
 
-export NAV_ZSHENV="2.0"
-
-# don't automatically nice background processes
-unsetopt BGNICE
-# automatically export variables, where possible
+# some basic zsh options. there are many more in zsh(1).
+setopt automenu autolist nobeep listtypes extendedglob
+setopt histignoredups rmstarsilent promptsubst
 #setopt allexport
-# what is this doing here?
-export PWD
 
-PATH=$PATH:/bin:/usr/bin
+# set up autoload for functions
+if [[ -d ~/.zsh/misc ]] ; then
+  fpath=($fpath ~/.zsh/misc)
+  autoload $(cd ~/.zsh/misc ; echo *[^\~])
+fi
 
-# determine binary type
-BINTYPE=`uname -sr | sed -e "s/ /-/g"`
-case $BINTYPE in
-  SunOS-5*) BINTYPE="Solaris-2.x" ;;
-  SunOS-4*) BINTYPE="SunOS-4.x"   ;;
-  Linux-*)  BINTYPE="Linux"       ;;
-esac  
 
-# ==============
-# PATH FROM HELL
-# ==============
+if [ -z "$NAV_ZSHENV" ]; then
+  . $HOME/.zshenv
+fi
 
-HOMEBIN=$HOME/bin
-# a list of possible binary locations. directories that you want at the
-# front of your PATH should come first in this list.
-BINDIRS=( $HOMEBIN/$BINTYPE            \
-          $HOMEBIN/links                \
-	  $HOMEBIN/scripts              \
-          $HOMEBIN/noarch               \
-          $HOME/sw/bin                  \
-	  /usr/remote/bin		\
-	  /usr/local/X11R6/bin 		\
-	  /usr/local/lib/tex/bin 	\
-	  /usr/local/lib/mh             \
-	  /usr/local/etc                \
-	  /usr/local/bin                \
-	  /usr/ucb                      \
-	  /usr/games			\
-          /usr/games/bin                \
-	  /usr/bin                      \
-	  /usr/etc                      \
-	  /usr/sbin                     \
-	  /sbin                         \
-	  /bin                          \
-	  /etc                          \
-	  /usr/sunos/bin                \
-	  /usr/X11R6/bin                \
-          /var/spool/news/bin           \
-	  /usr/openwin/bin		\
-	  /usr/ccs/bin			\
-	  /usr/lib/news/bin             )
+# if this is a terminal worth setting the title in
+case "$TERM" in
+  xterm*|Eterm|screen)
+    add-zsh-hook chpwd chpwd-set-title
+    #chpwd
+    ;;
+esac
 
-# start with a fresh path, please, since I do a lot of work on my path here...
-unset PATH	    
-foreach i in $BINDIRS ; do
-  if [[ -d $i ]]; then
-    if [[ -n "$PATH" ]] ; then
-      PATH=$PATH:$i
+# This sets the prompt to <user>@<host>$, unless root, in which
+# case the $ is replaced by #.
+export PROMPT="%B%n%b@%B%m%b%(#.#.$) "
+
+# display the current working directory on the right of the screen, at prompt
+export RPROMPT='[ %36<..<%~ ]'
+
+# set up git prompt
+if [[ -e ~/.zsh/git-prompt/gitprompt.zsh ]]; then
+  fpath=($fpath ~/.zsh/git-prompt)
+  source ~/.zsh/git-prompt/gitprompt.zsh
+  gitrprompt() {
+    __gp="$(git_super_status)"
+    if [[ -n "$__gp" ]]; then
+      echo "[ %36<..<%~ $__gp ]"
     else
-      PATH=$i
+      echo "[ %36<..<%~ ]"
     fi
-  fi
-done
-# add . (here) to path only if not root.
-if [[ "$USERNAME" != "root" ]]; then
-  PATH=$PATH:.
-fi
-rehash
-export PATH
-
-# ======================
-# MANPATH FROM PURGATORY
-# ======================
-
-MANDIRS=( /usr/local/man       \
-          /usr/local/share/man \
-	  /usr/man             \
-	  /usr/X11R6/man   \
-	  $HOME/man            )
-
-unset MANPATH
-foreach i in $MANDIRS ; do
-  if [[ -d $i ]] ; then
-    if [[ -n "$MANPATH" ]] ; then
-      MANPATH=$MANPATH:$i
-    else
-      MANPATH=$i
-    fi
-  fi
-done
-export MANPATH
-unset MANPATH
-
-# ===============
-# LD_LIBRARY_PATH
-# ===============
-
-export LD_LIBRARY_PATH=$HOME/lib
-
-# ick, this is ugly.
-if [[ -d /usr/local/X11R6/lib ]] ; then
-  export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/X11R6/lib"
-fi
-if [ -d /usr/dt/lib ] ; then
-  export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/dt/lib"
-fi
-if [ -d /usr/remote/lib/simeon ] ; then
-  export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/remote/lib/simeon"
+  }
+  export RPROMPT='$(gitrprompt)'
 fi
 
-# =============
-# VARIABLE SOUP
-# =============
+# normally ignore the files with extensions listed here
+#export fignore=( \~ \# .bak )
 
-# Actually, this is gibberish. Will fix if necessary. 
-#if [[ -n "$DISPLAY" ]] ; then
-#  case $DISPLAY in
-#    :*) export DISPLAY=`hostname`$DISPLAY ;;
-#  esac
-#fi
+# set editor preference. 
+# extra complexity is for chaining fallthrough preferences, say xemacs then
+# regular emacs, then emacs -nw.
+if which emacs >/dev/null 2>&1 ; then
+  TE="emacs" ; TV="emacs"
+fi
+export EDITOR=$TE
+export VISUAL=$TV
+unset TE TV
 
-# your name here
-# method 1: just set it to a string
-NAME='Nick Vargish'
-# method 2: extract it from the passwd file... Goddess I love Unix. :^)
-#if grep "^${USERNAME}:" /etc/passwd >/dev/null 2>&1 ; then
-#  export NAME="$( grep "^${USERNAME}:" /etc/passwd | 
-#                  cut -d ":" -f 5 | cut -d "," -f 1 )"
-#else
-#  export NAME="$( ypcat passwd | grep "^${USERNAME}:" | 
-#                  cut -d ":" -f 5 | cut -d"," -f 1 )"
-#fi
+# set pager preference
+if which less >/dev/null 2>&1 ; then
+  export PAGER=less
+  # options to control the default behavior of less
+  export LESS="-Mia -j3"
+else
+  export PAGER=more
+fi
 
-# SHOST is used in title bar settings and icon names (see bin/zsh.fn/chpwd)
-DOMAIN=$( cat /etc/resolv.conf | grep "domain" | cut -f 2 -d " " )
-export SHOST=`basename $HOST $DOMAIN`
+# load aliases
+if [[ -f $HOME/.zshalii ]]; then
+  . $HOME/.zshalii
+fi
 
-# the next three variables are used by trn
-export SAVEDIR=$HOME/news
-export KILLGLOBAL=%p/.kills/KILL
-export KILLLOCAL=%p/.kills/%c/KILL
+# load completion customization
+if [[ -f $HOME/.zcomplete ]]; then
+  . $HOME/.zcomplete
+fi
 
-# PGP environment variables
-export PGPPATH=$HOME/.pgp
+# using xfaces, so we don't need bif
+if [[ "$TERM" = "xterm" ]]; then
+  export MAILCHECK=0
+fi
 
-# netscape stuff
-#if [ -d /usr/local/lib/X11/nls ] ; then
-#  export XNLSPATH=/usr/local/lib/X11/nls
-#fi
+# invoke chpwd so that it's (1) autoloaded and (2) invoked once to set titlebar
+# Ask Nick how to set your titlebar in an xterm.
+if which chpwd >/dev/null 2>&1 ; then
+  chpwd 
+fi
 
-# XKeysymDB
-#if [ -f /usr/openwin/lib/XKeysymDB ] ; then
-#  export XKEYSYMDB=/usr/openwin/lib/XKeysymDB
-#else
-#  export XKEYSYMDB=/usr/X11/lib/X11/XKeysymDB
-#fi
-
-# Disable global compinit (always seems broken)
-skip_global_compinit=1
-
-# system mailbox
-# MAIL=$HOME/Mailbox
-
-# default printer
-#export PRINTER=hp855c
-
-# Scheme-specific
-#export SCHEME_LIBRARY_PATH=/usr/local/lib/slib/:/usr/local/share/guile/1.1a/
-#export STK_LIBRARY=/usr/local/lib/stk/3.0b2/
-#export ENVDRAW_LIBRARY_PATH=/usr/local/lib/stk/EnvDraw/
-
-# news server
-export NNTPSERVER=wdc.news.speakeasy.net
-
-# CVS environment
-#export CVSROOT=":ext:nav@tanelorn:/opt/cvsroot"
-#export CVSROOT=/opt/cvsroot
-
-# mail stuff
-#MAILHOST=bandersnatch.org
-
-# nethack!
-export HACKOPTIONS='name:Bander,pickup_types:$,DECgraphics,color,dogname:Misha,catname:Molly,fruit:durian,!rest_on_space,showscore,showexp,time,!cmdassist,autodig'
-export NETHACKOPTIONS="$HACKOPTIONS"
-
+cd `pwd`
