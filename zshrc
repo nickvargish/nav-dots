@@ -21,7 +21,7 @@ if [[ -d ~/.zsh/misc ]] ; then
   autoload $(cd ~/.zsh/misc ; echo *[^\~])
 fi
 
-if [ -z "$NAV_ZSHENV" ]; then
+if [[ -z "$NAV_ZSHENV" ]]; then
   . $HOME/.zshenv
 fi
 
@@ -85,17 +85,6 @@ fi
 # load completion customization
 if [[ -f $HOME/.zcomplete ]]; then
   . $HOME/.zcomplete
-fi
-
-# using xfaces, so we don't need bif
-if [[ "$TERM" = "xterm" ]]; then
-  export MAILCHECK=0
-fi
-
-# invoke chpwd so that it's (1) autoloaded and (2) invoked once to set titlebar
-# Ask Nick how to set your titlebar in an xterm.
-if which chpwd >/dev/null 2>&1 ; then
-  chpwd 
 fi
 
 cd `pwd`
