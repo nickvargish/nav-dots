@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 _dots=(
   emacs
@@ -8,7 +8,7 @@ _dots=(
   )
 
 for f in $_dots; do
-  [[ -e $f ]] && continue
+  [[ ! -e $f ]] && continue
   if [[ -e $HOME/.$f ]]; then
     rm -rf $HOME/.$f.bak
     mv $HOME/.$f $HOME/.$f.bak
