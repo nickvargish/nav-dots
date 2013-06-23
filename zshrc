@@ -19,15 +19,12 @@ setopt automenu autolist nobeep listtypes extendedglob
 setopt histignoredups rmstarsilent promptsubst
 #setopt allexport
 
-if [[ -z "$NAV_ZSHENV" ]]; then
-  . $HOME/.zshenv
-fi
+[[ -z "$NAV_ZSHENV" ]] && source $HOME/.zshenv
 
 # if this is a terminal worth setting the title in
 case "$TERM" in
   xterm*|Eterm|screen)
     add-zsh-hook chpwd chpwd-set-title
-    #chpwd
     ;;
 esac
 

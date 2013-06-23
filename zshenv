@@ -70,9 +70,8 @@ _bindirs=( $HOMEBIN/$BINTYPE
 path=($^_bindirs(N))
 
 # add . to path only if not root.
-if [[ "$USERNAME" != "root" ]]; then
-  path+=.
-fi
+[[ "$USERNAME" != "root" ]] && path+=.
+
 rehash
 export path
 
