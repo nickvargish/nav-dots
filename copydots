@@ -1,14 +1,20 @@
 #!/bin/sh
 
-for f in emacs gnus zshenv zshrc zsh zshalii tmux.conf; do
-  if [ -e $HOME/.$f ] ; then
+_dots=(
+  emacs
+  gnus
+  tmux.conf
+  zsh zshenv zshrc zshalii zshcomplete
+  )
+
+for f in $_dots; do
+  [[ -e $f ]] && continue
+  if [[ -e $HOME/.$f ]]; then
     rm -rf $HOME/.$f.bak
     mv $HOME/.$f $HOME/.$f.bak
   fi
   cp -R $f $HOME/.$f
 done
 
-if [ ! -d $HOME/bin ]; then
-  mkdir $HOME/bin
-fi
+[[ -d $HOME/bin ]] || mkdir $HOME/bin
 cp -R noarch $HOME/bin

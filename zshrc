@@ -1,3 +1,4 @@
+#!/bin/zsh
 #######################
 ##                   ##
 ##   Nick's .zshrc   ##
@@ -32,21 +33,21 @@ esac
 
 # This sets the prompt to <user>@<host>$, unless root, in which
 # case the $ is replaced by #.
-export PROMPT="%B%n%b@%B%m%b%(#.#.$) "
+export PROMPT='%B%n%b@%B%m%b%(#.#.$) '
 
 # display the current working directory on the right of the screen, at prompt
-export RPROMPT='[ %36<..<%~ ]'
+export RPROMPT='  %38<…<%~'
 
 # set up git prompt
 if [[ (-e ~/.zsh/git-prompt/gitprompt.zsh) && (-n "$(whence git)") ]]; then
-  fpath=($fpath ~/.zsh/git-prompt)
   source ~/.zsh/git-prompt/gitprompt.zsh
+  export ZSH_THEME_GIT_PROMPT_NOCACHE=1
   gitrprompt() {
     __gp="$(git_super_status)"
     if [[ -n "$__gp" ]]; then
-      echo "[ %36<..<%~ $__gp ]"
+      print -n "  %38<…<%~ $__gp"
     else
-      echo "[ %36<..<%~ ]"
+      print -n "  %38<…<%~"
     fi
   }
   export RPROMPT='$(gitrprompt)'
@@ -80,8 +81,8 @@ if [[ -f $HOME/.zshalii ]]; then
 fi
 
 # load completion customization
-if [[ -f $HOME/.zcomplete ]]; then
-  . $HOME/.zcomplete
+if [[ -f $HOME/.zshcomplete ]]; then
+  . $HOME/.zshcomplete
 fi
 
 cd `pwd`

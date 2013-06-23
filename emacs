@@ -147,6 +147,16 @@
 (setq interpreter-mode-alist 
       (append '(("ruby" . ruby-mode)) interpreter-mode-alist))
 
+;;
+;; sh stuff
+;;
+(autoload 'sh-mode "sh-mode" "Major mode for editing (ba|z)sh scripts." t)
+(setq auto-mode-alist (cons '("\\.sh$" . sh-mode) auto-mode-alist))
+(setq interpreter-mode-alist 
+      (append '(("bin/sh" . sh-mode)) interpreter-mode-alist)
+      (append '(("bin/zsh" . sh-mode)) interpreter-mode-alist)
+      (append '(("bin/bash" . sh-mode)) interpreter-mode-alist)
+      )
 
 ;;; ==============
 ;;; Customizations
