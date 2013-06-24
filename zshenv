@@ -98,5 +98,5 @@ export DOMAIN=${_hostname#*\.}
 #export CVSROOT=/opt/cvsroot
 
 # nethack!
-export HACKOPTIONS='name:Bander,pickup_types:$,DECgraphics,color,dogname:Misha,catname:Molly,fruit:durian,!rest_on_space,showscore,showexp,time,!cmdassist,autodig'
+export HACKOPTIONS='name:Bander,pickup_types:$,DECgraphics,color,dogname:Misha,catname:Molly,fruit:durian,!rest_on_space,showscore,showexp,time,!cmdassist,autodig,suppress_alert:3.4.3'
 export NETHACKOPTIONS="$HACKOPTIONS"
