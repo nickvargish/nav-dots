@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case $(uname) in
+  Darwin)
+    reattach-to-user-namespace pbpaste 
+    ;;
+  *)
+    xclip -o 
+esac
+
