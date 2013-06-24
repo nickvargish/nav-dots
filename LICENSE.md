@@ -1,7 +1,7 @@
 
 *Copyright (c) 2013, Nicholas Andrew Vargish*
 
-_All rights reserved._
+__All rights reserved.__
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
