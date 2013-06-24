@@ -32,7 +32,7 @@ Unix environment.
 
 ### Scripts ###
 
-  - `noarch`
+  - `noarch`  
     Copied to `$HOME/bin/noarch`, these are architecture independent
     scripts.
 
