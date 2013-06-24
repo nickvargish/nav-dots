@@ -41,11 +41,12 @@ if [[ (-e ~/.zsh/git-prompt/gitprompt.zsh) && (-n "$(whence git)") ]]; then
   export ZSH_THEME_GIT_PROMPT_NOCACHE=1
   gitrprompt() {
     __gp="$(git_super_status)"
-    if [[ -n "$__gp" ]]; then
-      print -n "  %38<…<%~ $__gp"
-    else
-      print -n "  %38<…<%~"
-    fi
+    print -n "  %38<…<%~${__gp:+ $__gp}"
+    #if [[ -n "$__gp" ]]; then
+    #  print -n "  %38<…<%~ $__gp"
+    #else
+    #  print -n "  %38<…<%~"
+    #fi
   }
   export RPROMPT='$(gitrprompt)'
 fi

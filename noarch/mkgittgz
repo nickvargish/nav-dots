@@ -1,0 +1,5 @@
+#!/bin/sh
+
+_dirname=$(pwd | awk -F/ '{ print $NF }')
+
+git archive --prefix="${_dirname}/" -o "../${_dirname}.tgz" master
