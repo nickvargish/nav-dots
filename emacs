@@ -148,15 +148,25 @@
       (append '(("ruby" . ruby-mode)) interpreter-mode-alist))
 
 ;;
+;; markdown-mode
+;;
+;(cond ((locate-library "markdown-mode")
+;       (message "markdown-mode...")
+;       (require 'markdown-mode)
+;))
+
+;;
 ;; sh stuff
 ;;
-(autoload 'sh-mode "sh-mode" "Major mode for editing (ba|z)sh scripts." t)
+(autoload 'sh-mode "sh-script" "Major mode for editing (ba|z)sh scripts." t)
 (setq auto-mode-alist (cons '("\\.sh$" . sh-mode) auto-mode-alist))
-(setq interpreter-mode-alist 
-      (append '(("bin/sh" . sh-mode)) interpreter-mode-alist)
-      (append '(("bin/zsh" . sh-mode)) interpreter-mode-alist)
-      (append '(("bin/bash" . sh-mode)) interpreter-mode-alist)
-      )
+(setq auto-mode-alist 
+      (append '(("bin/sh" . sh-mode)
+		("bin/zsh" . sh-mode)
+		("bin/bash" . sh-mode))
+	      auto-mode-alist))
+(setq interpreter-mode-alist (cons '("sh" . sh-mode)
+				   interpreter-mode-alist))
 
 ;;; ==============
 ;;; Customizations
