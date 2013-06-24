@@ -42,11 +42,6 @@ if [[ (-e ~/.zsh/git-prompt/gitprompt.zsh) && (-n "$(whence git)") ]]; then
   gitrprompt() {
     __gp="$(git_super_status)"
     print -n "  %38<…<%~${__gp:+ $__gp}"
-    #if [[ -n "$__gp" ]]; then
-    #  print -n "  %38<…<%~ $__gp"
-    #else
-    #  print -n "  %38<…<%~"
-    #fi
   }
   export RPROMPT='$(gitrprompt)'
 fi
