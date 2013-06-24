@@ -78,4 +78,5 @@ if [[ -f $HOME/.zshcomplete ]]; then
   . $HOME/.zshcomplete
 fi
 
-cd `pwd`
+cd $PWD
+
