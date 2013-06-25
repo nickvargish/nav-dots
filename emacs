@@ -209,6 +209,12 @@
 (custom-set-variables
  '(load-home-init-file t))
 
+;;
+;; enable column number in the status bar
+;;
+(column-number-mode)
+
+
 ;;; ====================
 ;;; From emacs, to emacs
 ;;; ====================
