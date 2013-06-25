@@ -1,0 +1,33 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+  if [ -e $HOME/.tmuxmouse ]; then
+    __mode='off'
+  else
+    __mode='on'
+  fi
+else
+  __mode=$1
+fi
+
+case $__mode in
+  on)
+    touch $HOME/.tmuxmouse
+    echo "Activating tmux mouse support."
+    ;;
+  off)
+    rm -f $HOME/.tmuxmouse
+    echo "Deactivating tmux mouse support."
+    ;;
+  *)
+    echo "Uknown mode: $__mode"
+    exit 1
+    ;;
+esac
+
+tmux set -gq mode-mouse $__mode
+tmux set -gq mouse-select-pane $__mode
+tmux set -gq mouse-select-window $__mode
+tmux set -gq mouse-resize-pane $__mode
+
+exit 0
