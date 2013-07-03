@@ -94,8 +94,9 @@ export DOMAIN=${_hostname#*\.}
 #export ENVDRAW_LIBRARY_PATH=/usr/local/lib/stk/EnvDraw/
 
 # CVS environment
-#export CVSROOT=":ext:nav@tanelorn:/opt/cvsroot"
-#export CVSROOT=/opt/cvsroot
+# Sourcefire CVS:
+export CVSROOT=":ext:scm.sfeng.sourcefire.com:/usr/cvsroot"
+export CVS_RSH=ssh
 
 # nethack!
 export HACKOPTIONS='name:Bander,pickup_types:$,DECgraphics,color,dogname:Misha,catname:Molly,fruit:durian,!rest_on_space,showscore,showexp,time,!cmdassist,autodig,suppress_alert:3.4.3'

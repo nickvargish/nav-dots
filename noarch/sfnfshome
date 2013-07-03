@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case "$1" in
+  -u)
+    fusermount -u ~/nfs
+    ;;
+  *)
+    sshfs nvargish@dev64.cm.sourcefire.com: ~/nfs
+    ;;
+esac
