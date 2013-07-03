@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for f in emacs gnus tmux.conf zsh zshenv zshrc zshalii zshcomplete; do
+for f in bash_profile emacs gnus tmux.conf zsh zshenv zshrc zshalii zshcomplete; do
   [ ! -e $f ] && continue
   if [ -e $HOME/.$f ]; then
     rm -rf $HOME/.$f.bak
