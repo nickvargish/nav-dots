@@ -25,9 +25,9 @@ case $__mode in
     ;;
 esac
 
-tmux set -gq mode-mouse $__mode
-tmux set -gq mouse-select-pane $__mode
-tmux set -gq mouse-select-window $__mode
-tmux set -gq mouse-resize-pane $__mode
+tmux set -g mode-mouse $__mode >/dev/null 2>&1
+tmux set -g mouse-select-pane $__mode  >/dev/null 2>&1
+tmux set -g mouse-select-window $__mode  >/dev/null 2>&1
+tmux set -g mouse-resize-pane $__mode  >/dev/null 2>&1
 
 exit 0
