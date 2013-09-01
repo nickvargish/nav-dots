@@ -54,12 +54,12 @@ HOMEBIN=$HOME/bin
 # a list of possible binary locations. directories that you want at the
 # front of your PATH should come first in this list.
 _bindirs=( $HOMEBIN/$BINTYPE
-           $HOMEBIN/links
+     $HOMEBIN/links
 	   $HOMEBIN/scripts
-           $HOMEBIN/noarch
-           $HOME/sw/bin
+     $HOMEBIN/noarch
+     $HOME/sw/bin
  	   /usr/remote/bin
-   	   /usr/local/bin
+   	 /usr/local/bin
 	   /usr/games
 	   /usr/games/bin
 	   /usr/bin
