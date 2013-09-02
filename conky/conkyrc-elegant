@@ -1,0 +1,121 @@
+##################################################################################
+## Conky by http://jameshardy88.deviantart.com/art/Conky-JamesHardy88-122466724 ##
+##		    Modified by Umair - http://www.NoobsLab.com    		##
+##################################################################################
+# Use Xft?
+use_xft yes
+#xftfont DejaVu Sans:size=8
+xftfont Trebuchet MS:size=8
+xftalpha 0.8
+text_buffer_size 2048
+
+# Update interval in seconds
+update_interval 1
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_transparent yes
+#own_window_type conky
+own_window_argb_visual yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# Minimum size of text area
+minimum_size 180 0
+#maximum_width 200
+
+# Draw shades?
+draw_shades yes
+
+# Draw outlines?
+draw_outline no
+
+# Draw borders around text
+draw_borders no
+
+# Stippled borders?
+stippled_borders 1
+
+# border margins
+#border_margin 5
+
+# border width
+border_width 1
+
+# Default colors and also border colors
+default_color FFFFFF
+default_shade_color black
+#default_outline_color white
+own_window_colour white
+color0 FFFFFF
+color1 AAAAAA
+
+# Text alignment, other possible values are commented
+#alignment top_left
+alignment top_right
+#alignment bottom_left
+#alignment bottom_right
+
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+gap_x 15
+gap_y 20
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+# set to yes if you want all text to be in uppercase
+uppercase no
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 1
+
+# number of net samples to average
+# set to 1 to disable averaging
+net_avg_samples 2
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+use_spacer none
+
+TEXT
+${font Trebuchet MS:size=12:weight=bold}${alignc}${time %A %d %B}${font}
+${hr 1}
+${voffset 2}${font OpenLogos:size=16}u${font}  ${nodename_short}${alignr}${machine} ${kernel}
+${font StyleBats:size=16}A${font}  CPU ${alignr}${cpu}% ${cpubar cpu0 8,60}
+${font StyleBats:size=16}g${font}  RAM ${alignr}$memperc% ${membar 8,60}
+${font StyleBats:size=16}j${font}  swap ${alignr}$swapperc% ${swapbar 8,60}
+${font StyleBats:size=16}q${font}  uptime ${alignr}${uptime}
+${font StyleBats:size=16}k${font}  processes ${alignr}$processes ($running_processes running)
+${hr 1}
+${voffset 4}${font PizzaDude Bullets:size=14}t${font}  reads ${alignr}${diskio_read} ${diskiograph_read 8,60}
+${voffset 4}${font PizzaDude Bullets:size=14}x${font}  writes ${alignr}${diskio_write} ${diskiograph_write 8,60}
+${voffset 4}${font PizzaDude Bullets:size=14}Z${font}  root ${alignr}${fs_free /} ${fs_bar 8,60 /}
+${voffset 4}${font PizzaDude Bullets:size=14}Z${font}  data ${alignr}${fs_free /data} ${fs_bar 8,60 /data}
+${voffset 4}${font PizzaDude Bullets:size=14}Z${font}  nfs-home ${alignr}${fs_free /home/nvargish/nfs} ${fs_bar 8,60 /home/nvargish/nfs}
+${hr 1}
+${voffset 4}${font PizzaDude Bullets:size=14}U${font}  Rx ${alignr}${downspeed}/s ${downspeedgraph eth0 8,60}
+${voffset 4}${font PizzaDude Bullets:size=14}O${font}  Tx ${alignr}${upspeed}/s ${upspeedgraph eth0 8,60}
+${voffset 4}${font PizzaDude Bullets:size=14}N${font}  upload ${alignr}${totalup eth0}
+${voffset 4}${font PizzaDude Bullets:size=14}T${font}  download ${alignr}${totaldown eth0}
+${voffset 4}${font PizzaDude Bullets:size=14}a${font}  eth0 ip4 ${alignr}${addr eth0}
+#${voffset 4}${font PizzaDude Bullets:size=14}b${font}  public IP ${alignr}${execi 1 ~/.conky/ip.sh}
+${hr 1}
+
+Process $alignr CPU% MEM%
+${stippled_hr}
+${top name 1}$alignr${top cpu 1} ${top mem 1}
+${top name 2}$alignr${top cpu 2} ${top mem 2}
+${top name 3}$alignr${top cpu 3} ${top mem 3}
+${top name 4}$alignr${top cpu 4} ${top mem 4}
+${top name 5}$alignr${top cpu 5} ${top mem 5}
+
