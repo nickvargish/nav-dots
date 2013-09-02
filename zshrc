@@ -10,8 +10,8 @@
 # last major revision: 2013-06-21
 
 # interactive zsh shells source this
-#       o commands that define the interactive environment go here
-#    	o PATH settings, aliases, et al belong in .zshenv
+#   o commands that define the interactive environment go here
+#   o PATH settings, aliases, et al belong in .zshenv
 
 
 # some basic zsh options. there are many more in zsh(1).
@@ -36,7 +36,9 @@ export PROMPT='%B%n%b@%B%m%b%(#.#.$) '
 export RPROMPT='  %38<…<%~'
 
 # set up git prompt
-if [[ (-e ~/.zsh/git-prompt/gitprompt.zsh) && (-n "$(whence git)") ]]; then
+if [[ (-e ~/.gitprompt) && \
+      (-e ~/.zsh/git-prompt/gitprompt.zsh) && \
+      (-n "$(whence git)") ]]; then
   source ~/.zsh/git-prompt/gitprompt.zsh
   export ZSH_THEME_GIT_PROMPT_NOCACHE=1
   gitrprompt() {
@@ -52,7 +54,7 @@ fi
 # set editor preference. 
 # extra complexity is for chaining fallthrough preferences, say xemacs then
 # regular emacs, then emacs -nw.
-if which emacs >/dev/null 2>&1 ; then
+if [[ -n "$(whence emacs)" ]]; then
   TE="emacs" ; TV="emacs"
 fi
 export EDITOR=$TE
@@ -60,7 +62,7 @@ export VISUAL=$TV
 unset TE TV
 
 # set pager preference
-if which less >/dev/null 2>&1 ; then
+if [[ -n "$(whence less)" ]]; then
   export PAGER=less
   # options to control the default behavior of less
   export LESS="-Mia -j3"
@@ -69,14 +71,9 @@ else
 fi
 
 # load aliases
-if [[ -f $HOME/.zshalii ]]; then
-  . $HOME/.zshalii
-fi
+[[ -f $HOME/.zshalii ]] && source $HOME/.zshalii
 
 # load completion customization
-if [[ -f $HOME/.zshcomplete ]]; then
-  . $HOME/.zshcomplete
-fi
+[[ -f $HOME/.zshcomplete ]] && source $HOME/.zshcomplete
 
 cd $PWD
-
