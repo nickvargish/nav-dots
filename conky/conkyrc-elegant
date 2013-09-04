@@ -1,11 +1,12 @@
 ##################################################################################
 ## Conky by http://jameshardy88.deviantart.com/art/Conky-JamesHardy88-122466724 ##
-##		    Modified by Umair - http://www.NoobsLab.com    		##
+##		    Modified by Umair - http://www.NoobsLab.com    		                ##
+##          Modified by Nick Vargish - http://nick.vargish.org                  ##
 ##################################################################################
+
 # Use Xft?
 use_xft yes
-#xftfont DejaVu Sans:size=8
-xftfont Trebuchet MS:size=8
+xftfont Ubuntu:size=8
 xftalpha 0.8
 text_buffer_size 2048
 
@@ -63,7 +64,6 @@ alignment top_right
 #alignment bottom_right
 
 # Gap between borders of screen and text
-# same thing as passing -x at command line
 gap_x 15
 gap_y 20
 
@@ -77,31 +77,38 @@ uppercase no
 # set to 1 to disable averaging
 cpu_avg_samples 1
 
-# number of net samples to average
-# set to 1 to disable averaging
+# number of net samples to average (set to 1 to disable averaging)
 net_avg_samples 2
 
 # Force UTF8? note that UTF8 support required XFT
 override_utf8_locale yes
 
-# Add spaces to keep things from moving about?  This only affects certain objects.
+# Add spaces to keep things from moving about?
 use_spacer none
 
+# Disk info template
+template2 ${font PizzaDude Bullets:size=14}Z${font}  \1${alignr}${fs_free \2} ${fs_bar 8,60 \2}
+
+# Top Process template.
+# You may need to tweak the goto values depending on your font.
+template3 Process${goto 110}CPU%${alignr}MEM%
+template4 ${top name \1}${goto 114}${top cpu \1}${alignr}${top mem \1}
+
 TEXT
-${font Trebuchet MS:size=12:weight=bold}${alignc}${time %A %d %B}${font}
+${font Trebuchet MS:size=11:weight=bold}${alignc}${time %A %d %B}${font}
 ${hr 1}
-${voffset 2}${font OpenLogos:size=16}u${font}  ${nodename_short}${alignr}${machine} ${kernel}
+${voffset 2}${font OpenLogos:size=16}u${font}  ${nodename_short}${alignr}(${machine}) ${kernel}
 ${font StyleBats:size=16}A${font}  CPU ${alignr}${cpu}% ${cpubar cpu0 8,60}
 ${font StyleBats:size=16}g${font}  RAM ${alignr}$memperc% ${membar 8,60}
 ${font StyleBats:size=16}j${font}  swap ${alignr}$swapperc% ${swapbar 8,60}
 ${font StyleBats:size=16}q${font}  uptime ${alignr}${uptime}
-${font StyleBats:size=16}k${font}  processes ${alignr}$processes ($running_processes running)
+${font StyleBats:size=16}k${font}  processes ${alignr}${running_processes} / ${processes}
 ${hr 1}
 ${voffset 4}${font PizzaDude Bullets:size=14}t${font}  reads ${alignr}${diskio_read} ${diskiograph_read 8,60}
 ${voffset 4}${font PizzaDude Bullets:size=14}x${font}  writes ${alignr}${diskio_write} ${diskiograph_write 8,60}
-${voffset 4}${font PizzaDude Bullets:size=14}Z${font}  root ${alignr}${fs_free /} ${fs_bar 8,60 /}
-${voffset 4}${font PizzaDude Bullets:size=14}Z${font}  data ${alignr}${fs_free /data} ${fs_bar 8,60 /data}
-${voffset 4}${font PizzaDude Bullets:size=14}Z${font}  nfs-home ${alignr}${fs_free /home/nvargish/nfs} ${fs_bar 8,60 /home/nvargish/nfs}
+${voffset 4}${template2 root /}
+${voffset 4}${template2 dos/data /dos/data}
+${voffset 4}${template2 dos/c /dos}
 ${hr 1}
 ${voffset 4}${font PizzaDude Bullets:size=14}U${font}  Rx ${alignr}${downspeed}/s ${downspeedgraph eth0 8,60}
 ${voffset 4}${font PizzaDude Bullets:size=14}O${font}  Tx ${alignr}${upspeed}/s ${upspeedgraph eth0 8,60}
@@ -110,12 +117,12 @@ ${voffset 4}${font PizzaDude Bullets:size=14}T${font}  download ${alignr}${total
 ${voffset 4}${font PizzaDude Bullets:size=14}a${font}  eth0 ip4 ${alignr}${addr eth0}
 #${voffset 4}${font PizzaDude Bullets:size=14}b${font}  public IP ${alignr}${execi 1 ~/.conky/ip.sh}
 ${hr 1}
-
-Process $alignr CPU% MEM%
+${voffset 4}${template3}
 ${stippled_hr}
-${top name 1}$alignr${top cpu 1} ${top mem 1}
-${top name 2}$alignr${top cpu 2} ${top mem 2}
-${top name 3}$alignr${top cpu 3} ${top mem 3}
-${top name 4}$alignr${top cpu 4} ${top mem 4}
-${top name 5}$alignr${top cpu 5} ${top mem 5}
+${template4 1}
+${template4 2}
+${template4 3}
+${template4 4}
+${template4 5}
+${hr 1}
 
