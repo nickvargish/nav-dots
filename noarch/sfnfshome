@@ -5,6 +5,6 @@ case "$1" in
     fusermount -u ~/nfs
     ;;
   *)
-    sshfs nvargish@dev64.cm.sourcefire.com: ~/nfs
+    sshfs nvargish@bitters64dev: ~/nfs
     ;;
 esac
