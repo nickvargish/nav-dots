@@ -10,6 +10,9 @@ xftfont Ubuntu:size=8
 xftalpha 0.8
 text_buffer_size 2048
 
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+
 # Update interval in seconds
 update_interval 1
 
@@ -65,7 +68,7 @@ alignment top_right
 
 # Gap between borders of screen and text
 gap_x 15
-gap_y 20
+gap_y 24
 
 # Subtract file system buffers from used memory?
 no_buffers yes
@@ -80,8 +83,16 @@ cpu_avg_samples 1
 # number of net samples to average (set to 1 to disable averaging)
 net_avg_samples 2
 
-# Force UTF8? note that UTF8 support required XFT
-override_utf8_locale yes
+# default bar/graph size
+default_bar_size   8,60
+default_graph_size 8,60
+default_gauge_size 10,10
+
+# Use shorter unit abbreviations.
+short_units yes
+
+# Percents get padded. Doesn't seem to make a difference..?
+pad_percents 2
 
 # Add spaces to keep things from moving about?
 use_spacer none
@@ -98,20 +109,20 @@ TEXT
 ${font Trebuchet MS:size=11:weight=bold}${alignc}${time %A %d %B}${font}
 ${hr 1}
 ${voffset 2}${font OpenLogos:size=16}u${font}  ${nodename_short}${alignr}(${machine}) ${kernel}
-${font StyleBats:size=16}A${font}  CPU ${alignr}${cpu}% ${cpubar cpu0 8,60}
-${font StyleBats:size=16}g${font}  RAM ${alignr}$memperc% ${membar 8,60}
-${font StyleBats:size=16}j${font}  swap ${alignr}$swapperc% ${swapbar 8,60}
+${font StyleBats:size=16}A${font}  CPU ${alignr}${cpu}% ${cpugraph cpu0 10,60}
+${font StyleBats:size=16}g${font}  RAM ${alignr}$memperc% ${membar 10,60}
+${font StyleBats:size=16}j${font}  swap ${alignr}$swapperc% ${swapbar 10,60}
 ${font StyleBats:size=16}q${font}  uptime ${alignr}${uptime}
 ${font StyleBats:size=16}k${font}  processes ${alignr}${running_processes} / ${processes}
 ${hr 1}
-${voffset 4}${font PizzaDude Bullets:size=14}t${font}  reads ${alignr}${diskio_read} ${diskiograph_read 8,60}
-${voffset 4}${font PizzaDude Bullets:size=14}x${font}  writes ${alignr}${diskio_write} ${diskiograph_write 8,60}
+${voffset 4}${font PizzaDude Bullets:size=14}t${font}  reads ${alignr}${diskio_read} ${diskiograph_read 10,60}
+${voffset 4}${font PizzaDude Bullets:size=14}x${font}  writes ${alignr}${diskio_write} ${diskiograph_write 10,60}
 ${voffset 4}${template2 root /}
 ${voffset 4}${template2 dos/data /dos/data}
 ${voffset 4}${template2 dos/c /dos}
 ${hr 1}
-${voffset 4}${font PizzaDude Bullets:size=14}U${font}  Rx ${alignr}${downspeed}/s ${downspeedgraph eth0 8,60}
-${voffset 4}${font PizzaDude Bullets:size=14}O${font}  Tx ${alignr}${upspeed}/s ${upspeedgraph eth0 8,60}
+${voffset 4}${font PizzaDude Bullets:size=14}U${font}  Rx ${alignr}${downspeed} ${downspeedgraph eth0 10,60}
+${voffset 4}${font PizzaDude Bullets:size=14}O${font}  Tx ${alignr}${upspeed} ${upspeedgraph eth0 10,60}
 ${voffset 4}${font PizzaDude Bullets:size=14}N${font}  upload ${alignr}${totalup eth0}
 ${voffset 4}${font PizzaDude Bullets:size=14}T${font}  download ${alignr}${totaldown eth0}
 ${voffset 4}${font PizzaDude Bullets:size=14}a${font}  eth0 ip4 ${alignr}${addr eth0}
