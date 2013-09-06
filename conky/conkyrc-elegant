@@ -83,11 +83,6 @@ cpu_avg_samples 1
 # number of net samples to average (set to 1 to disable averaging)
 net_avg_samples 2
 
-# default bar/graph size
-default_bar_size   8,60
-default_graph_size 8,60
-default_gauge_size 10,10
-
 # Use shorter unit abbreviations.
 short_units yes
 
@@ -109,20 +104,20 @@ TEXT
 ${font Trebuchet MS:size=11:weight=bold}${alignc}${time %A %d %B}${font}
 ${hr 1}
 ${voffset 2}${font OpenLogos:size=16}u${font}  ${nodename_short}${alignr}(${machine}) ${kernel}
+${font StyleBats:size=16}M${font}  load ${goto 90}${loadavg 1}${goto 130}${loadavg 2}${alignr}${loadavg 3}
 ${font StyleBats:size=16}A${font}  CPU ${alignr}${cpu}% ${cpugraph cpu0 10,60}
 ${font StyleBats:size=16}g${font}  RAM ${alignr}$memperc% ${membar 10,60}
 ${font StyleBats:size=16}j${font}  swap ${alignr}$swapperc% ${swapbar 10,60}
-${font StyleBats:size=16}q${font}  uptime ${alignr}${uptime}
 ${font StyleBats:size=16}k${font}  processes ${alignr}${running_processes} / ${processes}
+${font StyleBats:size=16}q${font}  uptime ${alignr}${uptime}
 ${hr 1}
 ${voffset 4}${font PizzaDude Bullets:size=14}t${font}  reads ${alignr}${diskio_read} ${diskiograph_read 10,60}
 ${voffset 4}${font PizzaDude Bullets:size=14}x${font}  writes ${alignr}${diskio_write} ${diskiograph_write 10,60}
 ${voffset 4}${template2 root /}
-${voffset 4}${template2 dos/data /dos/data}
-${voffset 4}${template2 dos/c /dos}
+${include /var/local/conky/template2-disks}
 ${hr 1}
-${voffset 4}${font PizzaDude Bullets:size=14}U${font}  Rx ${alignr}${downspeed} ${downspeedgraph eth0 10,60}
-${voffset 4}${font PizzaDude Bullets:size=14}O${font}  Tx ${alignr}${upspeed} ${upspeedgraph eth0 10,60}
+${voffset 4}${font PizzaDude Bullets:size=14}U${font}  eth0 rx ${alignr}${downspeed} ${downspeedgraph eth0 10,60}
+${voffset 4}${font PizzaDude Bullets:size=14}O${font}  eth0 tx ${alignr}${upspeed} ${upspeedgraph eth0 10,60}
 ${voffset 4}${font PizzaDude Bullets:size=14}N${font}  upload ${alignr}${totalup eth0}
 ${voffset 4}${font PizzaDude Bullets:size=14}T${font}  download ${alignr}${totaldown eth0}
 ${voffset 4}${font PizzaDude Bullets:size=14}a${font}  eth0 ip4 ${alignr}${addr eth0}
