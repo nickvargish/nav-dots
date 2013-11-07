@@ -95,7 +95,7 @@ export DOMAIN=${_hostname#*\.}
 
 # CVS environment
 # Sourcefire CVS:
-export CVSROOT=":ext:scm.sfeng.sourcefire.com:/usr/cvsroot"
+export CVSROOT=":ext:nvargish@scm.sfeng.sourcefire.com:/usr/cvsroot"
 export CVS_RSH=ssh
 
 # nethack!

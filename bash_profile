@@ -9,6 +9,6 @@ export PATH=$PATH:$HOME/bin/noarch
 
 # CVS environment
 # Sourcefire CVS:
-export CVSROOT=":ext:scm.sfeng.sourcefire.com:/usr/cvsroot"
+export CVSROOT=":ext:nvargish@scm:/usr/cvsroot"
 export CVS_RSH=ssh
 
