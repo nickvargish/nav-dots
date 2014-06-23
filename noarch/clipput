@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ `uname` = "Dawin" ]; then
+  cmd=pbcopy
+else
+  cmd="xclip -i"
+fi
+$cmd
