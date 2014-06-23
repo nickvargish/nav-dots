@@ -9,5 +9,5 @@ for f in bash_profile emacs gnus tmux.conf zsh zshenv zshrc zshalii zshcomplete;
   cp -R $f $HOME/.$f
 done
 
-[ -d $HOME/bin ] || mkdir $HOME/bin
-cp -R noarch $HOME/bin
+[ -d $HOME/bin/noarch ] || mkdir -p $HOME/bin/noarch
+cp -R noarch/* $HOME/bin/noarch
