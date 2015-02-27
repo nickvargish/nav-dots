@@ -1,12 +1,17 @@
 #!/bin/sh
 
-for f in bash_profile emacs gnus tmux.conf zsh zshenv zshrc zshalii zshcomplete; do
-  [ ! -e $f ] && continue
-  if [ -e $HOME/.$f ]; then
-    rm -rf $HOME/.$f.bak
-    mv $HOME/.$f $HOME/.$f.bak
+dotfiles="bash_profile"
+dotfiles="$dotfiles emacs gnus"
+dotfiles="$dotfiles tmux.conf"
+dotfiles="$dotfiles zshenv zshrc zshalii zshcomplete"
+
+for df in $dotfiles; do
+  [ ! -e $df ] && continue
+  if [ -e $HOME/.$df ]; then
+    rm -rf $HOME/.$df.bak
+    mv $HOME/.$df $HOME/.$df.bak
   fi
-  cp -R $f $HOME/.$f
+  cp -R $df $HOME/.$df
 done
 
 [ -d $HOME/bin/noarch ] || mkdir -p $HOME/bin/noarch

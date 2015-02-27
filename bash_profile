@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #
 #
 # Nick's bash_profile
