@@ -10,7 +10,7 @@ done
 mkdir -p $HOME/bin
 cp -R noarch $HOME/bin
 
-if /usr/bin/which -s zsh ; then
+if which zsh >/dev/null ; then
 	[ -e "$HOME/.zprezto" ] || git clone --recursive \
 		https://github.com/nickvargish/prezto.git \
 		"$HOME/.zprezto"
