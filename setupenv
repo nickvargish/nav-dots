@@ -1,10 +1,10 @@
 #!/bin/sh
 
-thisdir=`pwd`
+_thisdir=`pwd`
 
-for rcfile in emacs bash_profile tmux.conf ; do
-	[ -e "$HOME/.$rcfile" ] && mv -f "$HOME/.$rcfile" "$HOME/.$rcfile.bak"
-	ln -s "$thisdir/$rcfile" "$HOME/.$rcfile"
+for _rcfile in emacs bash_profile tmux.conf ; do
+	[ -e "$HOME/.$_rcfile" ] && mv -f "$HOME/.$_rcfile" "$HOME/.$_rcfile.bak"
+	ln -s "$_thisdir/$_rcfile" "$HOME/.$_rcfile"
 done
 
 mkdir -p $HOME/bin
